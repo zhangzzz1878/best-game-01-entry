@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Neon Swarm — Arena Survival</title>
+<meta name="description" content="Neon Swarm: a fast neon arena survival shooter. Dodge the swarm, level up, beat the Warden.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpolygon points='16,3 29,29 16,23 3,29' fill='%2322d3ee'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<canvas id="game-canvas"></canvas>
+
+<!-- In-game HUD -->
+<div id="hud">
+  <div id="hud-top-left">
+    <div id="level-text">LV 1</div>
+    <div class="bar hp-bar"><div id="hp-fill"></div><span id="hp-text">100 / 100</span></div>
+    <div class="bar xp-bar"><div id="xp-fill"></div></div>
+    <div id="dash-row"><div class="bar dash-bar"><div id="dash-fill"></div></div><span id="dash-label" class="ready">DASH READY [SPACE]</span></div>
+  </div>
+  <div id="hud-top-center">
+    <div id="wave-text">WAVE 1</div>
+    <div id="enemies-text">0 HOSTILES</div>
+    <div id="boss-bar">
+      <div id="boss-name">THE WARDEN</div>
+      <div class="bar boss-hp-bar"><div id="boss-fill"></div></div>
+    </div>
+  </div>
+  <div id="hud-top-right">
+    <div id="score-text">000000</div>
+    <div id="combo-text"></div>
+    <div id="kills-text">0 KILLS</div>
+    <div id="time-text">0:00</div>
+  </div>
+</div>
+
+<div id="banner"><span id="banner-text"></span></div>
+<button id="mute-btn" type="button">SOUND ON</button>
+
+<!-- Title screen -->
+<div id="title-screen" class="screen">
+  <div class="panel">
+    <h1 class="game-title">NEON<span>SWARM</span></h1>
+    <p class="tagline">The swarm is coming. How long can you last?</p>
+    <div class="controls-grid">
+      <div><kbd>W A S D</kbd><span>Move</span></div>
+      <div><kbd>MOUSE</kbd><span>Aim — fire is automatic</span></div>
+      <div><kbd>SPACE</kbd><span>Dash (brief invulnerability)</span></div>
+      <div><kbd>ESC</kbd><span>Pause</span><kbd>M</kbd><span>Mute</span></div>
+    </div>
+    <p class="howto">Destroy enemies, collect green data shards to level up, choose upgrades, and survive 10 waves to face — and beat — the Warden.</p>
+    <button id="start-btn" class="big-btn" type="button">▶ &nbsp;START RUN</button>
+    <div class="best-row">
+      <span>BEST <b id="best-score">000000</b></span>
+      <span id="best-wave">NO RUNS YET — GOOD LUCK, PILOT</span>
+      <span id="best-victories"></span>
+    </div>
+  </div>
+</div>
+
+<!-- Pause screen -->
+<div id="pause-screen" class="screen">
+  <div class="panel">
+    <h2>PAUSED</h2>
+    <p class="tagline">The swarm waits for no one. Except now.</p>
+    <button id="resume-btn" class="big-btn" type="button">RESUME</button>
+    <button id="restart-btn" class="ghost-btn" type="button">RESTART RUN</button>
+  </div>
+</div>
+
+<!-- Level-up screen -->
+<div id="levelup-screen" class="screen">
+  <div class="panel wide">
+    <h2>LEVEL UP — CHOOSE AN UPGRADE</h2>
+    <p class="tagline">Pick one. The swarm is still out there.</p>
+    <div id="levelup-cards"></div>
+  </div>
+</div>
+
+<!-- Game over screen -->
+<div id="gameover-screen" class="screen">
+  <div class="panel">
+    <h2 class="danger-title">SIGNAL LOST</h2>
+    <p class="tagline">Your ship was overrun by the swarm.</p>
+    <div id="new-best">★ NEW BEST SCORE ★</div>
+    <div class="score-big" id="final-score">000000</div>
+    <div class="stats-row">
+      <span id="final-wave">WAVE 1</span>
+      <span id="final-kills">0 KILLS</span>
+      <span id="final-time">0:00</span>
+    </div>
+    <div id="best-line" class="best-line"></div>
+    <button id="retry-btn" class="big-btn" type="button">↻ &nbsp;TRY AGAIN &nbsp;[R]</button>
+  </div>
+</div>
+
+<!-- Victory screen -->
+<div id="victory-screen" class="screen">
+  <div class="panel">
+    <h2 class="victory-title">WARDEN DESTROYED</h2>
+    <p class="tagline">Ten waves. One pilot. The arena is yours.</p>
+    <div class="score-big" id="victory-score">000000</div>
+    <div class="stats-row">
+      <span id="victory-kills">0 KILLS</span>
+      <span id="victory-time">0:00</span>
+    </div>
+    <div id="victory-best" class="best-line"></div>
+    <button id="continue-btn" class="big-btn" type="button">CONTINUE — ENDLESS MODE</button>
+    <button id="again-btn" class="ghost-btn" type="button">NEW RUN &nbsp;[R]</button>
+  </div>
+</div>
+
+<script type="module" src="src/main.js"></script>
+</body>
+</html>
